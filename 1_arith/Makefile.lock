@@ -1,0 +1,13 @@
+srcdir   = .
+builddir = $(srcdir)/build
+PROGRAM  = main
+
+SRCS = $(PROGRAM).c
+
+run: $(builddir)/$(PROGRAM)
+	$(builddir)/$(PROGRAM)
+
+$(builddir):
+	mkdir -p $@
+
+$(builddir)/$(PROGRAM): $(srcdir)/$(SRCS)
