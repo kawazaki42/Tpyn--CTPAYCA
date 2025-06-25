@@ -6,12 +6,17 @@
  * Ссылка: https://ivtipm.github.io/Programming/Glava02/index02.htm#z59
  */
 
-#include <stdio.h>  /* Стандартный ввод-вывод: printf, scanf, puts */
+#include <stdio.h>   /* Стандартный ввод-вывод: printf, scanf, puts */
+#include <locale.h>  /* setlocale, LC_ALL */
 
 
 /// @brief Главная процедура (функция) программы.
 /// @return 0 при успешном выполнении программы
 int main() {
+    // Установить кодировку UTF-8
+    // Локаль США (для разделителя-точки)
+    setlocale(LC_ALL, "en_US.UTF8");
+
     // Ввод данных
 
     float x, y;  //< Входные данные: координаты точки

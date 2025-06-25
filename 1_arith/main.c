@@ -5,11 +5,12 @@
  */
 
 
-#include <stdio.h>         /* Стандартный ввод-вывод. printf, scanf */
+#include <stdio.h>         /* Стандартный ввод-вывод: printf, scanf */
+#include <locale.h>        /* Локали, кодировки: setlocale, LC_ALL */
 #define _USE_MATH_DEFINES  /* Для совместимости с стандартами языка.
                             * Константа M_PI
                             */
-#include <math.h>          /* Математика. sin, cos, pow */
+#include <math.h>          /* Математика: sin, cos, pow */
 
 
 // Для хранения данных и вычислений используется тип данных `float` -
@@ -53,6 +54,11 @@ float calc_b(float z) {
 /// @brief Главная процедура (функция) программы.
 /// @return 0 при успешном выполнении программы
 int main() {
+    // Установить кодировку UTF-8
+    // Локаль США (для разделителя-точки)
+    setlocale(LC_ALL, "en_US.UTF8");
+    
+    
     // Ввод данных
     float x, y, z;  //< Входные данные (переменные в формуле)
 
