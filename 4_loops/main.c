@@ -28,10 +28,13 @@ int main() {
 
     // Значение sin(x) не зависит от итерации, вычислим заранее
     float sin_x = sin(x);
+    float sin_x_pow = 1.0;
 
     float sum = 0.0;
     for(size_t i = 1; i <= n; i++) {
-        sum += powf(sin_x, i);
+        // sum += powf(sin_x, i);
+        sin_x_pow *= sin_x;
+        sum += sin_x_pow;
     }
 
     printf("%f\n", sum);
