@@ -72,6 +72,8 @@ void delete_matrix(matrix m, size_t nrows) {
         free(m[i]);
         m[i] = NULL;
     }
+
+    free(m);
 }
 
 
