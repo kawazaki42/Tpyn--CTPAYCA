@@ -93,10 +93,10 @@ int main() {
 
     int mat_order;  ///< Кол-во элементов в `a`
     printf("Порядок матрицы (n): ");
-    scanf("%i", &mat_order);
+    scanf_s("%i", &mat_order);
 
     // array a = new_array(mat_order);  // Выделяем память
-    matrix_of_float m = new_matrix(mat_order, mat_order);
+    matrix_of_float m = new_matrix_of_float(mat_order, mat_order);
 
     printf("Введите %dx%d (%d) действительных чисел через пробел:\n",
            mat_order, mat_order, mat_order*mat_order);
@@ -104,7 +104,7 @@ int main() {
     // Считываем `n` x `n` целых чисел в массив
     for(size_t i = 0; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
-            scanf("%f", &m[i][j]);
+            scanf_s("%f", &m[i][j]);
         }
     }
 
@@ -125,7 +125,7 @@ int main() {
     putchar('\n');
     printf("%f\n", tempmax);
 
-    delete_matrix(m, mat_order);
+    delete_matrix_of_float(m, mat_order);
 
     return EXIT_SUCCESS;
 }

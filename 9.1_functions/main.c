@@ -21,23 +21,17 @@
 #include <stdlib.h>   // malloc, free, exit
 #include <stdbool.h>  // bool, true, false
 #include <locale.h>   // setlocale
+#include "arrays.h"
 
 
 // Псевдонимы типов
 
-/**
- * @brief Элемент массива
- * 
- * (`float`)
- */
-typedef int elem;
-
-/**
- * @brief Динамический массив из элементов
- * 
- * `array` = `elem *` = `float *`
- */
-typedef elem *array;
+// /**
+//  * @brief Элемент массива
+//  * 
+//  * (`float`)
+//  */
+// typedef int elem;
 
 
 /**
@@ -56,12 +50,12 @@ typedef elem *array;
  * 
  *          `false` - в противном случае
  */
-bool is_perfect(elem x) {
+bool is_perfect(int x) {
     // Ненатуральное
     if(x < 1) return false;
 
-    elem sum = 0;
-    for(elem i = 1; i < x; i++) {  // [1, x) (не включая x !)
+    int sum = 0;
+    for(int i = 1; i < x; i++) {  // [1, x) (не включая x !)
         if(x % i == 0) {
             // Добавляем i в сумму только если x делится на i
             // т.е. i - делитель x
@@ -74,24 +68,6 @@ bool is_perfect(elem x) {
     }
 
     return false;
-}
-
-
-/**
- * @brief Выделить новый динамический массив из `size` элеметнов типа `elem`
- * @param size кол-во элементов в массиве
- * @return Указатель на выделенную память (динамический массив)
- */
-array new_array(size_t size) {
-    array result = calloc(size, sizeof(elem));
-    if (result == NULL) {
-        // Если не удалось выделить память, завершить программу с ошибкой.
-        puts("Не удалось выделить память.");
-        exit(EXIT_FAILURE);
-    }
-    
-    // Иначе вернуть указатель.
-    return result;
 }
 
 
@@ -109,15 +85,15 @@ int main() {
     /// Кол-во элементов в `a`
     int a_size;
     printf("Кол-во элементов (n): ");
-    scanf("%i", &a_size);
+    scanf_s("%i", &a_size);
 
-    array a = new_array(a_size);  // Выделяем память
+    array_of_int a = new_array_of_int(a_size);  // Выделяем память
 
     printf("Введите %d целых чисел через пробел:\n", a_size);
 
     // Считываем `n` целых чисел в массив
     for(size_t i = 0; i < a_size; i++) {
-        scanf("%i", &a[i]);
+        scanf_s("%i", &a[i]);
     }
 
     /// Находимся ли мы внутри отрезка?

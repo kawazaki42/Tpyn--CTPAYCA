@@ -14,9 +14,16 @@
 /**
  * @brief Динамический массив из элементов
  * 
- * `array` = `elem *` = `float *`
+ * `array_of_int` = `elem *` = `float *`
  */
 typedef float *array_of_float;
+
+/**
+ * @brief Динамический массив из элементов
+ * 
+ * `array_of_int` = `elem *` = `float *`
+ */
+typedef int *array_of_int;
 
 /**
  * @brief Двумерный динамический массив (матрица)
@@ -24,6 +31,7 @@ typedef float *array_of_float;
 typedef array_of_float *matrix_of_float;
 
 
-array_of_float new_array(size_t size);
-matrix_of_float new_matrix(size_t nrows, size_t ncols);
-void delete_matrix(matrix_of_float m, size_t nrows);
+array_of_float new_array_of_float(size_t size);
+array_of_int new_array_of_int(size_t size);
+matrix_of_float new_matrix_of_float(size_t nrows, size_t ncols);
+void delete_matrix_of_float(matrix_of_float m, size_t nrows);
