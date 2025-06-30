@@ -40,6 +40,12 @@ array_of_float new_array_of_float(size_t size) {
 }    
 
 
+/**
+ * @brief Считать со стандартного ввода динамический массив
+ *        из вещественных чисел.
+ * @param size кол-во элементов для массива
+ * @return Динамический массив (`float *`) длиной `size`
+ */
 array_of_float read_array_of_float(size_t size) {
     array_of_float result = new_array_of_float(size);
     for(size_t i = 0; i < size; i++) {
@@ -77,7 +83,8 @@ matrix_of_float new_matrix_of_float(size_t nrows, size_t ncols) {
 
 /**
  * @brief Очистить матрицу
- * @param m матрица
+ *        (вызвать `free` для всех ее строк и для массива указателей на них)
+ * @param m матрица (`float **`)
  * @param nrows кол-во строк в матрице
  */
 void delete_matrix_of_float(matrix_of_float m, size_t nrows) {
@@ -91,6 +98,14 @@ void delete_matrix_of_float(matrix_of_float m, size_t nrows) {
 }
 
 
+/**
+ * @brief Считать со стандартного ввода двухмерный динамический массив
+ *        (матрицу) из вещественных чисел.
+ * @param nrows кол-во строк для матрицы
+ * @param ncols кол-во столбцов для матрицы
+ * @return Динамический двухмерный массив (`float **`)
+ *         размерностью `nrows` x `ncols`
+ */
 matrix_of_float read_matrix_of_float(size_t nrows, size_t ncols) {
     matrix_of_float result = new_matrix_of_float(nrows, ncols);
     for(size_t i = 0; i < nrows; i++) {
