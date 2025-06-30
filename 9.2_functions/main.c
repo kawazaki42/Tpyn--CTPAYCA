@@ -87,6 +87,7 @@ bool in_area(size_t i, size_t j, size_t order) {
     // он выше только одной из диагоналей
 }
 
+
 /**
  * @brief Главная процедура
  * 
@@ -132,6 +133,9 @@ int main() {
     }
 
     putchar('\n');
+    print_matrix_of_float(m, mat_order, mat_order);
+    putchar('\n');
+    
     printf("%f\n", tempmax);
 
     delete_matrix_of_float(m, mat_order);
