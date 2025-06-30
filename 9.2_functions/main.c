@@ -5,6 +5,7 @@
  * Задача: Дана действительная квадратная матрица порядка n.
  *         Найти наибольшее из значений элементов,
  *         расположенных в заштрихованной части матрицы.
+ *         ('песочные часы', см. рисунок в задачнике)
  * Ссылка: https://ivtipm.github.io/Programming/Glava20/index20.htm#z692
  */
 
@@ -12,7 +13,7 @@
 #include <stdlib.h>   // malloc, free, exit
 #include <stdbool.h>  // bool, true, false
 #include <locale.h>   // setlocale
-#include "arrays.h"
+#include "arrays.h"   // matrices
 
 
 /**
@@ -89,36 +90,15 @@ bool in_area(size_t i, size_t j, size_t order) {
 
 
 /**
- * @brief Главная процедура
- * 
- * @return `EXIT_SUCCESS` (или 0) при успешном завершении
- * 
- *         `EXIT_FAILURE` при ошибке (напр. нехватка памяти)
+ * @brief Найти наибольший элемент заштрихованной области квадратной матрицы
+ *        (см. `in_area`, задачник)
+ * @param m квадратная матрица из действительных чисел
+ * @param mat_order порядок квадратной матрицы `m`
+ * @return Наибольший вещественный элемент заштрихованной области
  */
-int main() {
-    // Установить кодировку UTF-8
-    // Локаль США (для разделителя-точки)
-    setlocale(LC_ALL, "en_US.UTF8");
-
-    /// Порядок матрицы
-    int mat_order;
-    printf("Порядок матрицы (n): ");
-    scanf_s("%i", &mat_order);
-
-    // array a = new_array(mat_order);  // Выделяем память
-    matrix_of_float m = new_matrix_of_float(mat_order, mat_order);
-
-    printf("Введите %dx%d (%d) действительных чисел через пробел:\n",
-           mat_order, mat_order, mat_order*mat_order);
-
-    // Считываем `n` x `n` целых чисел в массив
-    for(size_t i = 0; i < mat_order; i++) {
-        for(size_t j = 0; j < mat_order; j++) {
-            scanf_s("%f", &m[i][j]);
-        }
-    }
-
+float max_conditioned(matrix_of_float m, size_t mat_order) {
     float tempmax = m[0][0];
+    
     for(size_t i = 0; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
             if( in_area(i, j, mat_order) ) {
@@ -132,11 +112,54 @@ int main() {
         }
     }
 
+    return tempmax;
+}
+
+
+/**
+ * @brief Главная процедура
+ * 
+ * @return `EXIT_SUCCESS` (или 0) при успешном завершении
+ * 
+ *         `EXIT_FAILURE` при ошибке (напр. нехватка памяти)
+ */
+int main() {
+    // Установить кодировку UTF-8
+    // Локаль США (для разделителя-точки)
+    setlocale(LC_ALL, "en_US.UTF8");
+
+
+    // Ввод данных
+
+    /// Порядок матрицы
+    int mat_order;
+    printf("Порядок матрицы (n): ");
+    scanf_s("%i", &mat_order);
+
+    matrix_of_float m = new_matrix_of_float(mat_order, mat_order);
+    printf("Введите %dx%d (%d) действительных чисел через пробел:\n",
+           mat_order, mat_order, mat_order*mat_order);
+
+    // Считываем `n` x `n` целых чисел в массив
+    for(size_t i = 0; i < mat_order; i++) {
+        for(size_t j = 0; j < mat_order; j++) {
+            scanf_s("%f", &m[i][j]);
+        }
+    }
+
+
+    // Вывод
+
+    // Вывести входную матрицу (для лучшей читаемости)
     putchar('\n');
     print_matrix_of_float(m, mat_order, mat_order);
     putchar('\n');
-    
-    printf("%f\n", tempmax);
+
+    // Ответ на задачу
+    printf("%f\n", max_conditioned(m, mat_order) );
+
+
+    // Завершение
 
     delete_matrix_of_float(m, mat_order);
 
