@@ -96,7 +96,7 @@ int main() {
     scanf("%i", &mat_order);
 
     // array a = new_array(mat_order);  // Выделяем память
-    matrix m = new_matrix(mat_order, mat_order);
+    matrix_of_float m = new_matrix(mat_order, mat_order);
 
     printf("Введите %dx%d (%d) действительных чисел через пробел:\n",
            mat_order, mat_order, mat_order*mat_order);
@@ -108,7 +108,7 @@ int main() {
         }
     }
 
-    elem tempmax = m[0][0];
+    float tempmax = m[0][0];
     for(size_t i = 0; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
             if( in_area(i, j, mat_order) ) {

@@ -7,8 +7,8 @@
  * @param size кол-во элементов в массиве
  * @return Указатель на выделенную память (динамический массив)
  */
-array new_array(size_t size) {
-    array result = calloc(size, sizeof(elem));
+array_of_float new_array(size_t size) {
+    array_of_float result = calloc(size, sizeof(float));
     if (result == NULL) {
         // Если не удалось выделить память, завершить программу с ошибкой.
         puts("Не удалось выделить память.");
@@ -27,9 +27,9 @@ array new_array(size_t size) {
  * @param ncols кол-во столбцов
  * @return Указатель на выделенную память (динамический двумерный массив)
  */
-matrix new_matrix(size_t nrows, size_t ncols) {
+matrix_of_float new_matrix(size_t nrows, size_t ncols) {
     // Выделяем массив указателей
-    matrix result = calloc(nrows, sizeof(array));
+    matrix_of_float result = calloc(nrows, sizeof(array_of_float));
     if(result == NULL) {
         // Если не удалось выделить память, завершить программу с ошибкой.
         puts("Не удалось выделить память.");
@@ -51,7 +51,7 @@ matrix new_matrix(size_t nrows, size_t ncols) {
  * @param m матрица
  * @param nrows кол-во строк в матрице
  */
-void delete_matrix(matrix m, size_t nrows) {
+void delete_matrix(matrix_of_float m, size_t nrows) {
     for(size_t i = 0; i < nrows; i++) {
         // Очистить память каждой строки
         free(m[i]);
