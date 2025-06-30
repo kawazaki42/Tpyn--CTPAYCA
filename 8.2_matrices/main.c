@@ -14,6 +14,12 @@
 #include "arrays.h"  // arrays, matrices
 
 
+/**
+ * @brief Вычислить скалярное произведение двух векторов.
+ * @param a,b вектор (динамический массив, `float *`)
+ * @param size размер обоих векторов
+ * @return Скалярное произведение `a` * `b`
+ */
 float dot_product(array_of_float a, array_of_float b, size_t size) {
     float sum = 0.0;
     for(size_t i = 0; i < size; i++) {
@@ -23,6 +29,14 @@ float dot_product(array_of_float a, array_of_float b, size_t size) {
 }
 
 
+/** 
+ * @brief Умножить квадратную матрицу на вектор.
+ * @param m матрица (`float **`)
+ * @param x вектор (`float *`)
+ * @param size порядок матрицы и длина вектора
+ * @return Результат умножения матрицы на вектор - другой вектор
+ *         (`float *`, новый указатель)
+ */
 array_of_float multiply_mat_vec(matrix_of_float m, array_of_float x, size_t size) {
     array_of_float result = new_array_of_float(size);
     for(size_t i = 0; i < size; i++) {
@@ -32,6 +46,12 @@ array_of_float multiply_mat_vec(matrix_of_float m, array_of_float x, size_t size
 }
 
 
+/**
+ * @brief К вектору `a` прибавить вектор `b` НА МЕСТЕ.
+ * @param[out] a вектор (получит сумму)
+ * @param[in] b другой вектор
+ * @param size кол-во элементов в обоих векторах
+ */
 void vec_add_inplace(array_of_float a, array_of_float b, size_t size) {
     for(size_t i = 0; i < size; i++) {
         a[i] += b[i];
@@ -65,18 +85,17 @@ int main() {
            mat_order*mat_order, mat_order, mat_order);
 
     printf("(Разделители - пробел и перевод строки)\n");
+
     putchar('\n');
     printf("Матрица A:\n");
     matrix_of_float A = read_matrix_of_float(mat_order, mat_order);
-
     putchar('\n');
-    printf("Для каждого вектора введите n действительных чисел\n");
 
-    printf("(Разделитель - пробел)\n");
+    puts("Для каждого вектора введите n действительных чисел");
+    puts("(Разделитель - пробел)");
     
-    printf("(n = %d)\n", mat_order);
+    printf("(n = %d)\n\n", mat_order);
 
-    putchar('\n');
     printf("Вектор x: ");
     array_of_float x = read_array_of_float(mat_order);
 
