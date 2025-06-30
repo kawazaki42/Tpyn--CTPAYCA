@@ -193,6 +193,9 @@ int main() {
     for(size_t i = 0; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
             if( in_area(i, j, mat_order) ) {
+                // Для каждого элемента матрицы, входящего в область,
+                // сравниваем с временным максимумом.
+                // Сохраняем в `tempmax` тот, что окажется больше.
                 if(m[i][j] > tempmax) {
                     tempmax = m[i][j];
                 }
