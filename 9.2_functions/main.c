@@ -156,7 +156,7 @@ int main() {
     putchar('\n');
 
     // Ответ на задачу
-    printf("%f\n", max_conditioned(m, mat_order) );
+    printf("Наибольший элемент в области: %8.2f\n", max_conditioned(m, mat_order) );
 
 
     // Завершение
