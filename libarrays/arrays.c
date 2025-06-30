@@ -1,7 +1,8 @@
 #include "arrays.h"
 
-#include <stdio.h>
+#include <stdio.h>   // puts
 #include <stdlib.h>  // free, calloc
+
 
 /**
  * @brief Выделить новый динамический массив из `size` элеметнов типа `float`
@@ -19,6 +20,7 @@ array_of_float new_array_of_float(size_t size) {
     // Иначе вернуть указатель.
     return result;
 }
+
 
 /**
  * @brief Выделить новый динамический массив из `size` элеметнов типа `int`
@@ -61,6 +63,22 @@ matrix_of_float new_matrix_of_float(size_t nrows, size_t ncols) {
     }
 
     return result;
+}
+
+
+/**
+ * @brief Вывести (напечатать) матрицу на стандартный вывод
+ * @param m матрица из действительных чисел
+ * @param nrow кол-во строк в матрице
+ * @param nrow кол-во столбцов в матрице
+ */
+void print_matrix_of_float(matrix_of_float m, size_t nrows, size_t ncols) {
+    for(size_t i = 0; i < nrows; i++) {
+        for(size_t j = 0; j < ncols; j++) {
+            printf("%8.2f ", m[i][j]);
+        }
+        putchar('\n');
+    }
 }
 
 
