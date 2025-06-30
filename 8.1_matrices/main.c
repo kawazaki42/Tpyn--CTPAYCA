@@ -12,76 +12,9 @@
  */
 
 #include <stdio.h>    // printf, scanf
-#include <stdlib.h>   // malloc, free, exit
-#include <stdbool.h>  // bool, true, false
 #include <locale.h>   // setlocale
 #include "arrays.h"
 
-
-/**
- * @brief Находится ли элемент матрицы над главной диагональю?
- * @param i индекс строки матрицы
- * @param j индекс столбца матрицы
- * @return `true` - если элемент над главной диагональю
- * 
- *         `false` - в противном случае
- */
-bool above_diag_main(size_t i, size_t j) {
-    if(j > i) {
-        return true;
-    }
-
-    return false;
-}
-
-
-/**
- * @brief Находится ли элемент квадратной матрицы над побочной диагональю?
- * @param i индекс строки матрицы
- * @param j индекс столбца матрицы
- * @param order порядок квадратной матрицы
- * @return `true` - если элемент над побочной диагональю
- * 
- *         `false` - в противном случае
- */
-bool above_diag_anti(size_t i, size_t j, size_t order) {
-    // i: 0..order-1
-    // order-1 - 0 == order-1
-    // ...
-    // order-1 - (order-1) == 0
-    if(j < order-1 - i) {
-        return true;
-    }
-    
-    return false;
-}
-
-
-/**
- * @brief Находится ли элемент матрицы в области, указанной в задаче?
- * @param i индекс строки матрицы
- * @param j индекс столбца матрицы
- * @param order порядок квадратной матрицы
- * @return `true` - если элемент в области
- * 
- *         `false` - в противном случае
- */
-bool in_area(size_t i, size_t j, size_t order) {
-    if (i == j)
-        // На главной диагонали
-        return true;
-
-    if (order-1 - i == j)
-        // На побочной диагонали
-        return true;
-
-    bool main = above_diag_main(i, j);
-    bool anti = above_diag_anti(i, j, order);
-    return !(main ^ anti);
-    // `^` - операция исключающего ИЛИ (XOR)
-    // Другими словами, элемент _не_ входит в область если
-    // он выше только одной из диагоналей
-}
 
 /**
  * @brief Главная процедура
@@ -100,49 +33,34 @@ int main() {
     printf("Порядок матрицы (n): ");
     scanf_s("%i", &mat_order);
 
-    matrix_of_float m = new_matrix_of_float(mat_order, mat_order);
     /// Первая линейка матрицы (после единиц)
     array_of_float x = new_array_of_float(mat_order);
-
-    // printf("Введите %dx%d (%d) действительных чисел через пробел:\n",
-    //        mat_order, mat_order, mat_order*mat_order);
-
+    
     printf("Введите %d действительных чисел через пробел:\n", mat_order);    
-
+    
     // Считываем `n` целых чисел в массив
     for(size_t i = 0; i < mat_order; i++) {
         scanf_s("%f", &x[i]);
     }
-
-    // float tempmax = m[0][0];
-    // for(size_t i = 0; i < mat_order; i++) {
-    //     for(size_t j = 0; j < mat_order; j++) {
-    //         if( in_area(i, j, mat_order) ) {
-    //             // Для каждого элемента матрицы, входящего в область,
-    //             // сравниваем с временным максимумом.
-    //             // Сохраняем в `tempmax` тот, что окажется больше.
-    //             if(m[i][j] > tempmax) {
-    //                 tempmax = m[i][j];
-    //             }
-    //         }
-    //     }
-    // }
+    
+    matrix_of_float m = new_matrix_of_float(mat_order, mat_order);
 
     // Заполнить первую строку матрицы единицами
     // По условиям задачи
     for(size_t i = 0; i < mat_order; i++)
         m[0][i] = 1.0;
 
-    // Начиная со второй строки, умножать на x[j]
+    // Каждая строка, начиная со второй, равна
+    // предыдущей, поэлементно умноженной на x
     for(size_t i = 1; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
             m[i][j] = m[i-1][j] * x[j];
         }
     }
 
-    putchar('\n');
-    // printf("%f\n", tempmax);
+    putchar('\n');  // Отделить вывод пустой строкой
 
+    // Вывод матрицы
     for(size_t i = 0; i < mat_order; i++) {
         for(size_t j = 0; j < mat_order; j++) {
             printf("%8.2f ", m[i][j]);
