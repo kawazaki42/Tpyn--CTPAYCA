@@ -61,7 +61,7 @@ bool is_perfect(elem x) {
     if(x < 1) return false;
 
     elem sum = 0;
-    for(elem i = 1; i < x; i++) {  // не включая x !
+    for(elem i = 1; i < x; i++) {  // [1, x) (не включая x !)
         if(x % i == 0) {
             // Добавляем i в сумму только если x делится на i
             // т.е. i - делитель x
@@ -140,6 +140,7 @@ int main() {
 
     // Конец последовательности подразумевает конец отрезка
     if(in_subseq) printf("}");
+    in_subseq = false;
 
     putchar('\n');
 
