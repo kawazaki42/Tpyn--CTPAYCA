@@ -123,10 +123,11 @@ bool above_diag_main(size_t i, size_t j) {
  *         `false` - в противном случае
  */
 bool above_diag_anti(size_t i, size_t j, size_t order) {
+    // i: 0..order-1
     // order-1 - 0 == order-1
     // ...
     // order-1 - (order-1) == 0
-    if(order-1 - i < j) {
+    if(j < order-1 - i) {
         return true;
     }
     
@@ -154,9 +155,9 @@ bool in_area(size_t i, size_t j, size_t order) {
 
     bool main = above_diag_main(i, j);
     bool anti = above_diag_anti(i, j, order);
-    return main ^ anti;
+    return !(main ^ anti);
     // `^` - операция исключающего ИЛИ (XOR)
-    // Другими словами, элемент входит в область если
+    // Другими словами, элемент _не_ входит в область если
     // он выше только одной из диагоналей
 }
 
