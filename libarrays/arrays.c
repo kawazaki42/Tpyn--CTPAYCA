@@ -1,6 +1,7 @@
 #include "arrays.h"
 
 #include <stdio.h>
+#include <stdlib.h>  // free, calloc
 
 /**
  * @brief Выделить новый динамический массив из `size` элеметнов типа `float`

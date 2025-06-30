@@ -11,8 +11,9 @@
  * Ссылка:  https://ivtipm.github.io/Programming/Glava11/index11.htm#z378
  */
 
-#include <stdio.h>    // printf, scanf
-#include <locale.h>   // setlocale
+#include <stdio.h>   // printf, scanf
+#include <locale.h>  // setlocale
+#include <stdlib.h>  // EXIT_SUCCESS
 #include "arrays.h"
 
 
