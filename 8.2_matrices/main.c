@@ -14,26 +14,6 @@
 #include "arrays.h"  // arrays, matrices
 
 
-array_of_float read_array_of_float(size_t size) {
-    array_of_float result = new_array_of_float(size);
-    for(size_t i = 0; i < size; i++) {
-        scanf_s("%f", &result[i]);
-    }
-    return result;
-}
-
-
-matrix_of_float read_matrix_of_float(size_t nrows, size_t ncols) {
-    matrix_of_float result = new_matrix_of_float(nrows, ncols);
-    for(size_t i = 0; i < nrows; i++) {
-        for(size_t j = 0; j < ncols; j++) {
-            scanf_s("%f", &result[i][j]);
-        }
-    }
-    return result;
-}
-
-
 float dot_product(array_of_float a, array_of_float b, size_t size) {
     float sum = 0.0;
     for(size_t i = 0; i < size; i++) {
