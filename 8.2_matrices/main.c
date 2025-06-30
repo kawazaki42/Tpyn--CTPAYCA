@@ -11,7 +11,7 @@
 #include <stdio.h>   // printf, scanf
 #include <locale.h>  // setlocale
 #include <stdlib.h>  // EXIT_SUCCESS
-#include "arrays.h"
+#include "arrays.h"  // arrays, matrices
 
 
 array_of_float read_array_of_float(size_t size) {
@@ -71,6 +71,7 @@ int main() {
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
 
+
     /// Порядок матрицы
     int mat_order;
     printf("Порядок матрицы (n): ");
@@ -83,7 +84,6 @@ int main() {
     printf("Вектор x: ");
     array_of_float x = read_array_of_float(mat_order);
 
-    // printf("Введите %d действительных чисел через пробел:\n", mat_order); 
     printf("Вектор y: ");   
     array_of_float y = read_array_of_float(mat_order);
     
@@ -92,46 +92,28 @@ int main() {
     printf("Введите действительне числа через пробел.\n");
     matrix_of_float A = read_matrix_of_float(mat_order, mat_order);
 
+
     vec_add_inplace(x, y, mat_order);
     free(y);
 
     y = multiply_mat_vec(A, x, mat_order);
 
+
     putchar('\n');
 
     printf("A(x + y) = (");
+
     for(size_t i = 0; i < mat_order-1; i++)
         printf("%8.2f, ", y[i]);
+
     printf("%8.2f)\n", y[mat_order-1]);
-    // printf(")\n");
-
-    // // Заполнить первую строку матрицы единицами
-    // // По условиям задачи
-    // for(size_t i = 0; i < mat_order; i++)
-    //     m[0][i] = 1.0;
-
-    // // Каждая строка, начиная со второй, равна
-    // // предыдущей, поэлементно умноженной на x
-    // for(size_t i = 1; i < mat_order; i++) {
-    //     for(size_t j = 0; j < mat_order; j++) {
-    //         m[i][j] = m[i-1][j] * x[j];
-    //     }
-    // }
-
-    // putchar('\n');  // Отделить вывод пустой строкой
-
-    // // Вывод матрицы
-    // for(size_t i = 0; i < mat_order; i++) {
-    //     for(size_t j = 0; j < mat_order; j++) {
-    //         printf("%8.2f ", m[i][j]);
-    //     }
-    //     putchar('\n');
-    // }
+    
 
     free(x);
     free(y);
     delete_matrix_of_float(A, mat_order);
-    A = x = y = NULL;
+    x = y = NULL;
+    A = NULL;
 
     return EXIT_SUCCESS;
 }
