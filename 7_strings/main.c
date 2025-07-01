@@ -1,20 +1,23 @@
 /**
  * @file
  * @brief   Задача 269-Д
+ * 
  * @author  Николай Ковалев
+ * 
  * @details Даны натуральное число n, символы s1,...,sn.
- *          Группы символов, разделенные пробелами (одним или несколькими)
- *          и не содержащие пробелов внутри себя будем называть словамию
  *          Д) Найти какое-нибудь слово, начинающееся с буквы а.
+ * 
+ *          Слова - группы символов, разделенные пробелами
+ *          (одним или несколькими) и не содержащие пробелов внутри себя.
+ * 
  * Ссылка:  https://ivtipm.github.io/Programming/Glava08/index08.htm#z269
  */
 
-#include <stdio.h>   // printf, scanf
+#include <stdio.h>   // printf, scanf, getchar, ungetc
 #include <locale.h>  // setlocale
 #include <stdlib.h>  // EXIT_SUCCESS
-#include <ctype.h>
-#include <string.h>
-// #include "arrays.h"  // arrays, matrices
+#include <ctype.h>   // isspace
+// #include <string.h>  // strncmp
 
 
 char skip_word() {
@@ -40,53 +43,39 @@ int main() {
 
     // Ввод данных
 
-    /// Длина строки
+    // /// Длина строки
     // int length;
     // printf("Длина строки в байтах (n): ");
     // scanf_s("%i ", &length);
 
+
     /// Искомый символ
     char look_for;
-    printf("Искомый символ: ");
-    scanf_s("%c", &look_for, 1);
-    // size_t cwidth = strlen(look_for);
+    printf("Искомый символ для начала слова: ");
 
-    // putchar('\n');
-    printf("Введите строку:\n");
+    // 1 - длина буфера для scanf_s, т.е. ровно один символ
+    scanf_s("%c", &look_for, 1);
+
+
+    // printf("Введите строку из %d байт:\n", length);
     // puts("Остальное будет игнорировано");
 
-    // / Первый символ слова
-
-    // char buf[cwidth + 1];
-    // while(1) {
-    //     // scanf_s("%4s", buf, sizeof buf);
-    //     scanf_s(" ");
-    //     for(size_t i = 0; i < cwidth; i++) {
-    //         buf[i] = getchar();
-    //     }
-    //     buf[cwidth] = '\0';
-    
-    //     if(strncmp(buf, look_for, cwidth) == 0)
-    //         break;
-    //     scanf_s(" ");
-    //     scanf_s("%*s");
-    // }
-
-    // printf("%s", buf);
+    printf("Введите строку:\n");
 
     char cur;
-    // scanf_s(" ");
     while(1) {
-        // if(cur == look_for) {
-            // break;
-        // }
-        scanf_s(" ");  // Пропустить пробелы, если есть
+        scanf_s(" ");     // Пропустить пробелы, если есть
         cur = getchar();  // Считать ровно один символ
+        
         if(cur == look_for)
-            break;  // Нашли символ в начале слова
+            // Нашли символ в начале слова
+            break;
         else {
             // `ungetc` 'возвращает' считанный символ
             // в очередь чтения файла/потока данных.
+            // 
+            // Почему это необходимо?
+            // ======================
             //
             // При помощи `%s` мы хотим пропустить остаток слова.
             //
@@ -99,94 +88,32 @@ int main() {
             // Нужно вернуть символ в очередь ввода,
             // чтобы поглотилось только однобуквенное слово.
 
-            // Когда мы считываем из однобуквенного слова символ,
-            // `%*s` пропускает пробелы после него и 'поглощает' слово после них.
-            // Нам же нужно 'поглотить' только остаток слова.
-            // У однобуквенного слова нет остатка.
-            //
-            // Необходимо для случаев с однобуквенными словами.
-            // Когда мы считываем из него первый и единственный символ,
-            // далее в очереди идут пробелы и следующее слово.
-            // `%*s` пропускает начальные пробелы и 'поглощает' слово после них.
-            // Нам же нужно 'поглотить' только остаток слова, которого у
             ungetc(cur, stdin);
+
+            // 's' - слово, разделенное пробелами
+            //       (как раз подходит для задачи).
+            //
+            //       NOTE: не просто строка, как в случае с `printf`!
+            //
+            // '*' - не сохранять значение в переменную.
+            //
+            // Результат: пропускает целое слово, начиная с символа `cur`.
             scanf_s("%*s");
         }
-            // cur = skip_word();
-
-
-        // scanf_s("%*s");
-        // if(isspace(cur)) {
-        //     cur = getchar();  // символ после пробела
-        //     if(cur == look_for)
-        //         break;  // Нашли
-        //     // else
-        //         // continue;
-        // }
-        // cur = getchar();
     }
 
-    // do {
-    //     scanf_s(" %c", cur);
-    //     if(cur == look_for) break;
-    // } while(cur != look_for);
-    // if(cur == look_for) {
 
-    // char cur = getchar();
+    // Вывод.
+    // Не используем printf - избегаем переполнения буфера.
 
     putchar('\n');
-    while(!isspace(cur)) {
+
+    while( !isspace(cur) ) {
         putchar(cur);
         cur = getchar();
     }
-    putchar('\n');
-    return EXIT_SUCCESS;
-    // }
-
-    // printf("(Разделители - пробел и перевод строки)\n");
-
-    // putchar('\n');
-    // printf("Матрица A:\n");
-    // matrix_of_float A = read_matrix_of_float(length, length);
-    // putchar('\n');
-
-    // puts("Для каждого вектора введите n действительных чисел");
-    // puts("(Разделитель - пробел)");
-    
-    // printf("(n = %d)\n\n", length);
-
-    // printf("Вектор x: ");
-    // array_of_float x = read_array_of_float(length);
-
-    // printf("Вектор y: ");   
-    // array_of_float y = read_array_of_float(length);
-    
-
-    // // Вычисления
-    // vec_add_inplace(x, y, length);
-    // free(y);
-    // y = multiply_mat_vec(A, x, length);
-
-
-    // Вывод
-
-    // putchar('\n');
-    // printf("A(x + y) = (");
-
-    // // Все элементы, кроме последнего, через запятую
-    // for(size_t i = 0; i < length-1; i++)
-    //     printf("%.2f, ", y[i]);
-
-    // printf("%.2f)", y[length-1]);  // последний
-    // putchar('\n');
-    
 
     // Завершение
-    // free(x);
-    // free(y);
-    // delete_matrix_of_float(A, length);
-    // x = y = NULL;
-    // A = NULL;
-
-    // return EXIT_SUCCESS;
+    putchar('\n');
+    return EXIT_SUCCESS;
 }
