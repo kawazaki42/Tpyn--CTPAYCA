@@ -17,6 +17,14 @@
 // #include "arrays.h"  // arrays, matrices
 
 
+char skip_word() {
+    char cur;
+    do
+        cur = getchar();
+    while( !isspace(cur) );  // Пропустить не-пробелы
+}
+
+
 /**
  * @brief Главная процедура
  * 
@@ -27,56 +35,96 @@
 int main() {
     // Установить кодировку UTF-8
     // Локаль США (для разделителя-точки)
-    setlocale(LC_ALL, "ru_RU.UTF8");
+    setlocale(LC_ALL, "en_US.UTF8");
 
 
     // Ввод данных
 
     /// Длина строки
-    int length;
+    // int length;
     // printf("Длина строки в байтах (n): ");
     // scanf_s("%i ", &length);
 
     /// Искомый символ
-    char look_for[128];
+    char look_for;
     printf("Искомый символ: ");
-    scanf_s("%127s", look_for, sizeof look_for);
-    size_t cwidth = strlen(look_for);
+    scanf_s("%c", &look_for, 1);
+    // size_t cwidth = strlen(look_for);
 
     // putchar('\n');
-    printf("Введите строку длиной %d байт.\n", length);
-    puts("Остальное будет игнорировано");
+    printf("Введите строку:\n");
+    // puts("Остальное будет игнорировано");
 
     // / Первый символ слова
 
-    char buf[cwidth + 1];
-    while(1) {
-        // scanf_s("%4s", buf, sizeof buf);
-        scanf_s(" ");
-        for(size_t i = 0; i < cwidth; i++) {
-            buf[i] = getchar();
-        }
-        buf[cwidth] = '\0';
-    
-        if(strncmp(buf, look_for, cwidth) == 0)
-            break;
-        scanf_s(" ");
-        scanf_s("%*s");
-    }
-
-    printf("%s", buf);
-
-    // char cur;
+    // char buf[cwidth + 1];
     // while(1) {
-    //     cur = getchar();
-    //     if(isspace(cur)) {
-    //         cur = getchar();
-    //         if(cur == look_for)
-    //             break;  // Нашли
-    //         else
-    //             continue;
+    //     // scanf_s("%4s", buf, sizeof buf);
+    //     scanf_s(" ");
+    //     for(size_t i = 0; i < cwidth; i++) {
+    //         buf[i] = getchar();
     //     }
+    //     buf[cwidth] = '\0';
+    
+    //     if(strncmp(buf, look_for, cwidth) == 0)
+    //         break;
+    //     scanf_s(" ");
+    //     scanf_s("%*s");
     // }
+
+    // printf("%s", buf);
+
+    char cur;
+    // scanf_s(" ");
+    while(1) {
+        // if(cur == look_for) {
+            // break;
+        // }
+        scanf_s(" ");  // Пропустить пробелы, если есть
+        cur = getchar();  // Считать ровно один символ
+        if(cur == look_for)
+            break;  // Нашли символ в начале слова
+        else {
+            // `ungetc` 'возвращает' считанный символ
+            // в очередь чтения файла/потока данных.
+            //
+            // При помощи `%s` мы хотим пропустить остаток слова.
+            //
+            // У однобуквенного слова нет остатка.
+            // После него сразу идут пробелы.
+            //
+            // `%s` пропускает начальные пробелы,
+            // поэтому поглощает целое слово после однобуквенного.
+            //
+            // Нужно вернуть символ в очередь ввода,
+            // чтобы поглотилось только однобуквенное слово.
+
+            // Когда мы считываем из однобуквенного слова символ,
+            // `%*s` пропускает пробелы после него и 'поглощает' слово после них.
+            // Нам же нужно 'поглотить' только остаток слова.
+            // У однобуквенного слова нет остатка.
+            //
+            // Необходимо для случаев с однобуквенными словами.
+            // Когда мы считываем из него первый и единственный символ,
+            // далее в очереди идут пробелы и следующее слово.
+            // `%*s` пропускает начальные пробелы и 'поглощает' слово после них.
+            // Нам же нужно 'поглотить' только остаток слова, которого у
+            ungetc(cur, stdin);
+            scanf_s("%*s");
+        }
+            // cur = skip_word();
+
+
+        // scanf_s("%*s");
+        // if(isspace(cur)) {
+        //     cur = getchar();  // символ после пробела
+        //     if(cur == look_for)
+        //         break;  // Нашли
+        //     // else
+        //         // continue;
+        // }
+        // cur = getchar();
+    }
 
     // do {
     //     scanf_s(" %c", cur);
@@ -84,15 +132,15 @@ int main() {
     // } while(cur != look_for);
     // if(cur == look_for) {
 
-    char cur = getchar();
+    // char cur = getchar();
 
-        putchar('\n');
-        while(!isspace(cur)) {
-            putchar(cur);
-            cur = getchar();
-        }
-        putchar('\n');
-        return EXIT_SUCCESS;
+    putchar('\n');
+    while(!isspace(cur)) {
+        putchar(cur);
+        cur = getchar();
+    }
+    putchar('\n');
+    return EXIT_SUCCESS;
     // }
 
     // printf("(Разделители - пробел и перевод строки)\n");
