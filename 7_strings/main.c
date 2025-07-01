@@ -29,12 +29,20 @@
 /// Но не пропускает пробелы в начале строки и не использует буфер,
 /// scanf и printf, чтобы избежать переполнения.
 void echo_one_word() {
-    char cur = getchar();
+    // char cur = getchar();
 
-    while( !isspace(cur) ) {
-        putchar(cur);
-        cur = getchar();
-    }
+    // while( !isspace(cur) ) {
+    //     putchar(cur);
+    //     cur = getchar();
+    // }
+
+    while(
+        !isspace(
+            putchar(
+                getchar()
+            )
+        )
+    );
 }
 
 
