@@ -13,11 +13,11 @@
  * Ссылка:  https://ivtipm.github.io/Programming/Glava08/index08.htm#z269
  */
 
+#include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>   // printf, scanf, getchar, ungetc
 #include <locale.h>  // setlocale
-#include <stdlib.h>  // EXIT_SUCCESS
-#include <ctype.h>   // isspace
 // #include <string.h>  // strncmp
+#include <ctype.h>   // isspace
 
 
 /**
