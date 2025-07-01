@@ -20,14 +20,6 @@
 // #include <string.h>  // strncmp
 
 
-char skip_word() {
-    char cur;
-    do
-        cur = getchar();
-    while( !isspace(cur) );  // Пропустить не-пробелы
-}
-
-
 /**
  * @brief Главная процедура
  * 
