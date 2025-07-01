@@ -29,18 +29,19 @@ struct student {
 
 int read_student(FILE *fp, struct student *s) {
     // s = malloc( sizeof(struct student) );
-    int ret = fscanf_s(fp, "%127c,%127c,%hhu%c",
-                       s->first_name, sizeof s->first_name - 1,
-                       s->last_name,  sizeof s->last_name - 1,
-                       s->class_year, s->class_letter);
-    s->first_name[127] = '\n';
-    s->last_name[127] = '\n';
+    int ret = fscanf(fp, "%127s,%127s,%hhu%c",
+                       s->first_name, sizeof s->first_name,
+                       s->last_name,  sizeof s->last_name,
+                       &s->class_year,
+                       &s->class_letter, 1);
+    // s->first_name[127] = '\n';
+    // s->last_name[127] = '\n';
     return ret;
 }
 
 
 int print_student(struct student *s) {
-    return printf_s("%hhu%c: %s %s",
+    return printf_s("%hhu%c: %s %s\n",
                     s->class_year,
                     s->class_letter,
                     s->last_name,
@@ -78,6 +79,7 @@ int main() {
     for(size_t i = 0; i < storage_size; i++) {
         for(size_t j = 0; j < storage_size; j++) {
             if(
+                // (i != j) &&
                 (storage[i].class_year == storage[j].class_year) &&
                 (storage[i].class_letter == storage[j].class_letter) &&
                 strcmp(storage[i].last_name, storage[j].last_name) == 0
