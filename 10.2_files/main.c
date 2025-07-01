@@ -16,6 +16,36 @@
 #include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>   // fprintf, fscanfs, FILE
 #include <locale.h>  // setlocale
+#include <string.h>  // strcmp
+
+
+struct student {
+    char first_name[128];
+    char last_name[128];
+    unsigned char class_year;
+    char class_letter;
+};
+
+
+int read_student(FILE *fp, struct student *s) {
+    // s = malloc( sizeof(struct student) );
+    int ret = fscanf_s(fp, "%127c,%127c,%hhu%c",
+                       s->first_name, sizeof s->first_name - 1,
+                       s->last_name,  sizeof s->last_name - 1,
+                       s->class_year, s->class_letter);
+    s->first_name[127] = '\n';
+    s->last_name[127] = '\n';
+    return ret;
+}
+
+
+int print_student(struct student *s) {
+    return printf_s("%hhu%c: %s %s",
+                    s->class_year,
+                    s->class_letter,
+                    s->last_name,
+                    s->first_name);
+}
 
 
 /**
@@ -30,26 +60,37 @@ int main() {
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
 
-    char infname[] = "../in.txt";
-    char outfname[] = "../out.txt";
+    char infname[] = "../students.csv";
+    // char outfname[] = "../out.txt";
 
     FILE *infile = fopen(infname, "r");    // открыть для чтения
-    FILE *outfile = fopen(outfname, "w");  // открыть для записи
+    // FILE *outfile = fopen(outfname, "w");  // открыть для записи
 
     int ret;
-    int n;
+    struct student storage[1024];
+    size_t storage_size = 0;
 
-    ret = fscanf_s(infile, "%i", &n);
-    while(ret >= 1) {
-        if(n % 2 == 0)  // n делится на 2 без остатка
-            fprintf(outfile, "%i\n", n);
+    do {
+        ret = read_student(infile, &storage[storage_size]);
+        storage_size++;
+    } while(ret == 4);
 
-        ret = fscanf_s(infile, "%i", &n);
+    for(size_t i = 0; i < storage_size; i++) {
+        for(size_t j = 0; j < storage_size; j++) {
+            if(
+                (storage[i].class_year == storage[j].class_year) &&
+                (storage[i].class_letter == storage[j].class_letter) &&
+                strcmp(storage[i].last_name, storage[j].last_name) == 0
+            ) {
+                print_student(&storage[i]);
+                print_student(&storage[j]);
+            }
+        }
     }
 
     // Завершение
     fclose(infile);
-    fclose(outfile);
+    // fclose(outfile);
 
     return EXIT_SUCCESS;
 }
