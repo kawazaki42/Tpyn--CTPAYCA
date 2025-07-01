@@ -2,11 +2,3 @@
 /*/build/
 *.exe
 /.vscode/
-1_arith/main.ilk
-1_arith/main.obj
-1_arith/main.pdb
-1_arith/vc140.pdb
-2_conditions/main.ilk
-2_conditions/main.obj
-2_conditions/main.pdb
-2_conditions/vc140.pdb
