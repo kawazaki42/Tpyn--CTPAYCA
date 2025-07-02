@@ -1,4 +1,5 @@
 #include <stdlib.h>  // malloc, free, NULL
+#include <assert.h>  // assert
 #include "dllist.h"
 
 struct DLList_node *DLList_new_head(struct DLList_node *old_head, float data) {

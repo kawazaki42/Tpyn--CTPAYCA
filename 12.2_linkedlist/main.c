@@ -12,8 +12,9 @@
  */
 
 #include <stdlib.h>  // EXIT_SUCCESS
-#include <stdio.h>
+#include <stdio.h>   // printf, scanf
 #include <locale.h>  // setlocale
+#include <assert.h>  // assert
 #include "dllist.h"
 
 int main() {
@@ -44,17 +45,20 @@ int main() {
     }
 
     
-    float sum = 0.0;
+    /// Итераторы цикла
+    struct DLList_node *a, *b;
+    float prod = 1.0;
     for(
-        struct DLList_node *cur = head;
-        cur != NULL;
-        cur = cur->next
+        a = head, b = tail;
+        a != NULL;
+        a = a->next, b = b->prev
     ) {
-        float x = cur->data;
-        sum += x*x;
+        prod *= a->data + b->data;
     }
+    assert(a == NULL);
+    assert(b == NULL);
 
-    printf_s("Сумма квадратов посл-ти: %.2f\n", sum);
+    printf_s("Произведение сумм: %.2f\n", prod);
 
     DLList_delete(head);
     head = tail = NULL;  // Избегаем висячих указателей
