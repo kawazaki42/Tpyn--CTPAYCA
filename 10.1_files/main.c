@@ -14,7 +14,7 @@
 #include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>   // fprintf, fscanfs, FILE
 #include <locale.h>  // setlocale
-#include "filter.h"
+#include "filter.h"  // filter_even
 
 
 /**
@@ -32,31 +32,45 @@ int main(int argc, char **argv) {
     char *infname = "in.txt";
     char *outfname = "out.txt";
 
-    if(argc >= 2) {
+    // argv - массив строк-аргументов, включая имя программы (argv[0]).
+    // argc - длина массива, т.е. кол-во аргументов включая имя программы
+    // argc-1 - кол-во аргументов _без_ имени программы.
+
+    puts(argv[0]);
+
+    if(argc-1 >= 1) {
         infname = argv[1];
     }
 
-    if(argc >= 3) {
+    if(argc-1 >= 2) {
         infname = argv[2];
     }
 
-    FILE *infile, *outfile;
-    fopen_s(&infile, infname, "r");    // открыть для чтения
-    fopen_s(&outfile, outfname, "w");  // открыть для записи
 
+    FILE *infile, *outfile;
+
+
+    fopen_s(&infile, infname, "r");    // открыть для чтения
+    
     if(!infile) {
-        perror("Cannot open input file");
+        perror("Cannot open file for input");
         printf(infname);
         return EXIT_FAILURE;
     }
+    
 
+    fopen_s(&outfile, outfname, "w");  // открыть для записи
+    
     if(!outfile) {
-        perror("Cannot open output file");
+        perror("Cannot open file for input");
         printf(outfname);
         return EXIT_FAILURE;
     }
 
+
+    // Решение задачи при помощи функции из модуля filter
     filter_even(infile, outfile);
+
 
     // Завершение
     fclose(infile);
