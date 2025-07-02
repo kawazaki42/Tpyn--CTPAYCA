@@ -14,6 +14,7 @@
 #include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>   // fprintf, fscanfs, FILE
 #include <locale.h>  // setlocale
+#include "filter.h"
 
 
 /**
@@ -23,27 +24,37 @@
  * 
  *         `EXIT_FAILURE` при ошибке (напр. нехватка памяти)
  */
-int main() {
+int main(int argc, char **argv) {
     // Установить кодировку UTF-8
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
 
-    char infname[] = "../in.txt";
-    char outfname[] = "../out.txt";
+    char *infname = "in.txt";
+    char *outfname = "out.txt";
 
-    FILE *infile = fopen(infname, "r");    // открыть для чтения
-    FILE *outfile = fopen(outfname, "w");  // открыть для записи
-
-    int ret;
-    int n;
-
-    ret = fscanf_s(infile, "%i", &n);
-    while(ret >= 1) {
-        if(n % 2 == 0)  // n делится на 2 без остатка
-            fprintf(outfile, "%i\n", n);
-
-        ret = fscanf_s(infile, "%i", &n);
+    if(argc >= 1) {
+        infname = argv[0];
     }
+
+    if(argc >= 2) {
+        infname = argv[1];
+    }
+
+    FILE *infile, *outfile;
+    fopen_s(&infile, infname, "r");    // открыть для чтения
+    fopen_s(&outfile, outfname, "w");  // открыть для записи
+
+    if(!infile) {
+        perror("Cannot open input file");
+        return EXIT_FAILURE;
+    }
+
+    if(!outfile) {
+        perror("Cannot open output file");
+        return EXIT_FAILURE;
+    }
+
+    filter_even(infile, outfile);
 
     // Завершение
     fclose(infile);
