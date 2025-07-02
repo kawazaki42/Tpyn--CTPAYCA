@@ -13,7 +13,8 @@ struct SLList_node *SLList_new_tail(struct SLList_node *old_tail, float data) {
     struct SLList_node *result = malloc(sizeof *result);
     result->data = data;
     result->next = NULL;
-    old_tail->next = result;
+    if(old_tail != NULL)
+        old_tail->next = result;
     return result;
 }
 
