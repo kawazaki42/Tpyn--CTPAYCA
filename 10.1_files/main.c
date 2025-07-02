@@ -32,12 +32,12 @@ int main(int argc, char **argv) {
     char *infname = "in.txt";
     char *outfname = "out.txt";
 
-    if(argc >= 1) {
-        infname = argv[0];
-    }
-
     if(argc >= 2) {
         infname = argv[1];
+    }
+
+    if(argc >= 3) {
+        infname = argv[2];
     }
 
     FILE *infile, *outfile;
@@ -46,11 +46,13 @@ int main(int argc, char **argv) {
 
     if(!infile) {
         perror("Cannot open input file");
+        printf(infname);
         return EXIT_FAILURE;
     }
 
     if(!outfile) {
         perror("Cannot open output file");
+        printf(outfname);
         return EXIT_FAILURE;
     }
 
