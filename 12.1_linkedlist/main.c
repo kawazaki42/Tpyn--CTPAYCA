@@ -52,5 +52,6 @@ int main() {
     printf_s("%.2f\n", sum);
 
     SLList_delete(head);
+    head = tail = NULL;
     return EXIT_SUCCESS;
 }

@@ -24,12 +24,13 @@ void SLList_delete(struct SLList_node *head) {
 
     struct SLList_node *cur, *next;
 
-    cur = head;
-    next = head->next;
+    // for(cur = head; cur != NULL; cur = next)  // не подходит.
     
-    while(head != NULL) {
-        free(cur);
-        cur = next;
+    cur = head;
+    while(cur != NULL) {
         next = cur->next;
+        free(cur);
+
+        cur = next;
     }
 }
