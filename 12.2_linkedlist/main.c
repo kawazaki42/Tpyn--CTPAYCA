@@ -14,7 +14,7 @@
 #include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>
 #include <locale.h>  // setlocale
-#include "sllist.h"
+#include "dllist.h"
 
 int main() {
     // Установить кодировку UTF-8
@@ -27,7 +27,7 @@ int main() {
     scanf_s("%zu", &n);  // u - беззнаковый,
                          // z - длиной с size_t
 
-    struct SLList_node *head, *tail;
+    struct DLList_node *head, *tail;
     head = tail = NULL;  // изначально пусты
 
     printf_s("Введите %zu вещественных чисел через пробел:\n", n);
@@ -37,7 +37,7 @@ int main() {
         float data;
         scanf_s("%f", &data);
 
-        tail = SLList_new_tail(tail, data);
+        tail = DLList_new_tail(tail, data);
 
         if(i == 0)
             head = tail;
@@ -46,7 +46,7 @@ int main() {
     
     float sum = 0.0;
     for(
-        struct SLList_node *cur = head;
+        struct DLList_node *cur = head;
         cur != NULL;
         cur = cur->next
     ) {
@@ -56,7 +56,7 @@ int main() {
 
     printf_s("Сумма квадратов посл-ти: %.2f\n", sum);
 
-    SLList_delete(head);
+    DLList_delete(head);
     head = tail = NULL;  // Избегаем висячих указателей
     return EXIT_SUCCESS;
 }
