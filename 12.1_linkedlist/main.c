@@ -29,7 +29,7 @@ int main() {
     struct SLList_node *head, *tail;
     head = tail = NULL;  // изначально пусты
 
-    printf("Введите %d вещественных чисел через пробел:\n", n);
+    printf("Введите %zu вещественных чисел через пробел:\n", n);
 
     // Заполнение списка
     for(size_t i = 0; i < n; i++) {
