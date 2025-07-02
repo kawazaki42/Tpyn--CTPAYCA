@@ -15,7 +15,7 @@
 #include <stdio.h>   // printf, scanf
 #include <locale.h>  // setlocale
 #include <assert.h>  // assert
-#include "dllist.h"
+#include "dllist.h"  // DLList_* (двусвязные списки)
 
 int main() {
     // Установить кодировку UTF-8
@@ -28,8 +28,16 @@ int main() {
     scanf_s("%zu", &n);  // u - беззнаковый,
                          // z - длиной с size_t
 
-    struct DLList_node *head, *tail;
-    head = tail = NULL;  // изначально пусты
+
+    // Двусвязный список из вещественных чисел
+
+    /// Голова (первый элемент)
+    struct DLList_node *head;
+    /// Хвост (последний элемент)
+    struct DLList_node *tail;
+
+    // изначально cписок пуст
+    head = tail = NULL;
 
     printf_s("Введите %zu вещественных чисел через пробел:\n", n);
 
@@ -38,20 +46,29 @@ int main() {
         float data;
         scanf_s("%f", &data);
 
+        // Добавление в конец (append)
         tail = DLList_new_tail(tail, data);
 
         if(i == 0)
+            // иначе голова останется NULL
             head = tail;
     }
 
     
     /// Итераторы цикла
     struct DLList_node *a, *b;
+    /// Произведение (значение формулы)
     float prod = 1.0;
+    // a и b начинают с разных концов списка
+    // и движутся в противоположные стороны
     for(
-        a = head, b = tail;
+        a = head,
+        b = tail;
+
         a != NULL;
-        a = a->next, b = b->prev
+
+        a = a->next,
+        b = b->prev
     ) {
         prod *= a->data + b->data;
     }

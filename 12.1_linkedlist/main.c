@@ -33,7 +33,9 @@ int main() {
     struct SLList_node *head;
     /// Хвост (последний элемент)
     struct SLList_node *tail;
-    head = tail = NULL;  // изначально список пуст
+
+    // изначально список пуст
+    head = tail = NULL;
 
     printf_s("Введите %zu вещественных чисел через пробел:\n", n);
 
