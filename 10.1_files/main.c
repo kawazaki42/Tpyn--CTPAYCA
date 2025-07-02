@@ -24,7 +24,7 @@
  * 
  *         `EXIT_FAILURE` при ошибке (напр. нехватка памяти)
  */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
     // Установить кодировку UTF-8
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
@@ -36,14 +36,12 @@ int main(int argc, char **argv) {
     // argc - длина массива, т.е. кол-во аргументов включая имя программы
     // argc-1 - кол-во аргументов _без_ имени программы.
 
-    puts(argv[0]);
-
     if(argc-1 >= 1) {
         infname = argv[1];
     }
 
     if(argc-1 >= 2) {
-        infname = argv[2];
+        outfname = argv[2];
     }
 
 
