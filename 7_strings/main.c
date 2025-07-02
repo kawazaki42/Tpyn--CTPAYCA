@@ -14,6 +14,7 @@
  */
 
 #include <stdlib.h>  // EXIT_SUCCESS
+#define __STDC_WANT_LIB_EXT1__ 1
 #include <stdio.h>   // printf, scanf, getchar, ungetc
 #include <locale.h>  // setlocale
 // #include <string.h>  // strncmp
