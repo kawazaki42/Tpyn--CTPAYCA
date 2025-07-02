@@ -14,6 +14,7 @@
 #include <stdlib.h>  // EXIT_SUCCESS
 #include <stdio.h>   // fprintf, fscanfs, FILE
 #include <locale.h>  // setlocale
+#include <string.h>  // strcmp
 #include "filter.h"  // filter_even
 
 
@@ -29,12 +30,41 @@ int main(int argc, char *argv[]) {
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
 
-    char *infname = "in.txt";
-    char *outfname = "out.txt";
-
+    
     // argv - массив строк-аргументов, включая имя программы (argv[0]).
     // argc - длина массива, т.е. кол-во аргументов включая имя программы
     // argc-1 - кол-во аргументов _без_ имени программы.
+
+    // Значения по умолчанию
+    char *infname = "in.txt";
+    char *outfname = "out.txt";
+    
+    if(argc-1 >= 1) {
+        // switch(0) {
+        //     case strcmp(argv[1], "--help"):
+        //     case strcmp(argv[1], "/?"):
+        // }
+        int switches[] = {strcmp(argv[1], "--help"),
+                          strcmp(argv[1], "/?")};
+        if( (switches[0] == 0) || (switches[1] == 0) ) {
+            printf("%s [<infile>] [<outfile>]\n", argv[0]);
+
+            putchar('\n');
+            
+            puts("Записать в выходной файл "
+                "только четные числа из входного файла.");
+                
+            putchar('\n');
+
+            printf("'infile' - входной файл. "
+                   "По умолчанию: '%s'\n", infname);
+
+            printf("'outfile' - выходной файл. "
+                   "По умолчанию: '%s'\n", outfname);
+
+            return 0;
+        }
+    }
 
     if(argc-1 >= 1) {
         infname = argv[1];
