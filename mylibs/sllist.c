@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @brief   Односвязный список. Реализация
+ * @author  Николай Ковалев
+ */
+
 #include <stdlib.h>  // malloc, free, NULL
 #include "sllist.h"
 
