@@ -4,7 +4,7 @@
 struct SLList_node *SLList_new_head(struct SLList_node *old_head, float data) {
     struct SLList_node *result = malloc(sizeof *result);
     result->data = data;
-    result->next = NULL;
+    result->next = old_head;
     return result;
 }
 
