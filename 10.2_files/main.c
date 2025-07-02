@@ -15,7 +15,8 @@
 #include <stdio.h>   // fprintf, fscanfs, FILE
 #include <locale.h>  // setlocale
 #include <string.h>  // strcmp
-#include <stdbool.h>
+#include <stdbool.h>  // bool, true, false
+// #include <assert.h>  // assert
 
 
 struct student {
@@ -34,12 +35,13 @@ int read_student(FILE *fp, struct student *s) {
     //                    s->last_name,  sizeof s->last_name,
     //                    &s->class_year,
     //                    &s->class_letter, 1);
-    int ret = fscanf(fp, "%127s %127s %hhu%2c",
+    int ret = fscanf(fp, "%127s %127s %hhu%2s",
                        s->first_name,
                        s->last_name,
                        &s->class_year,
                        s->class_letter);
-    s->class_letter[2] = '\0';
+
+    // s->class_letter[2] = '\0';
     // s->first_name[127] = '\n';
     // s->last_name[127] = '\n';
     return ret;
@@ -48,7 +50,7 @@ int read_student(FILE *fp, struct student *s) {
 
 int print_student(struct student *s) {
     // return printf_s("%hhu%c: %s %s\n",
-    return printf("%hhu%s: %s %s\n",
+    return printf("%2hhu%s: %s %s\n",
                     s->class_year,
                     s->class_letter,
                     s->last_name,
@@ -89,25 +91,58 @@ int main(int argc, char *argv[]) {
 
     do {
         ret = read_student(infile, &storage[storage_size]);
+        if(ret != 4)
+            break;
+        // print_student(&storage[storage_size]);
         storage_size++;
-    } while(ret == 4);
+    } while(true);
+    // storage_size--;  // ret != 4; данные не считаны
+    // puts("***");
 
+    bool found = false;
+    struct student *a, *b;
     for(size_t i = 0; i < storage_size; i++) {
+        a = &storage[i];
         for(size_t j = 0; j < storage_size; j++) {
-            if(
-                (i != j) &&
-                (storage[i].class_year == storage[j].class_year) &&
-                (storage[i].class_letter == storage[j].class_letter) &&
-                strcmp(storage[i].last_name, storage[j].last_name) == 0
-            ) {
-                if(!storage_ignore[i])
-                    print_student(&storage[i]);
-                if(!storage_ignore[j])
-                    print_student(&storage[j]);
-                storage_ignore[i] = true;
-                storage_ignore[j] = true;
-            }
+            if(i == j)
+                continue;
+
+            b = &storage[j];
+
+            if(a->class_year != b->class_year)
+                continue;
+                
+            if(strcmp(a->class_letter,
+                      b->class_letter) != 0)
+                continue;
+            if(strcmp(a->last_name,
+                      b->last_name) != 0)
+                continue;
+
+            // if(
+            //     (i != j) &&
+            //     (a->class_year == b->class_year) &&
+            //     // (a->class_letter == b->class_letter) &&
+            //     strcmp(a->class_letter, b->class_letter) == 0 &&
+            //     strcmp(a->last_name, b->last_name) == 0
+            // ) {
+            if(!storage_ignore[i])
+                print_student(a);
+            if(!storage_ignore[j])
+                print_student(b);
+            storage_ignore[i] = true;
+            storage_ignore[j] = true;
+
+            found = true;
+            // }
         }
+    }
+
+    if(found) {
+        puts(u8"Найдены однофамильцы в классах (см. выше)");
+    } else {
+        puts(u8"Однофамильцы не найдены ни в одном классе");
+        
     }
 
     // Завершение
