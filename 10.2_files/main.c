@@ -29,7 +29,7 @@ struct student {
 
 int read_student(FILE *fp, struct student *s) {
     // s = malloc( sizeof(struct student) );
-    int ret = fscanf(fp, "%127s,%127s,%hhu%c",
+    int ret = fscanf_s(fp, "%127s %127s %hhu%c",
                        s->first_name, sizeof s->first_name,
                        s->last_name,  sizeof s->last_name,
                        &s->class_year,
@@ -61,7 +61,7 @@ int main() {
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
 
-    char infname[] = "../students.csv";
+    char infname[] = "../students.tsv";
     // char outfname[] = "../out.txt";
 
     FILE *infile = fopen(infname, "r");    // открыть для чтения
