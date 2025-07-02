@@ -1,13 +1,11 @@
 /**
  * @file
  * @author  Николай Ковалев
- * 
  * @details
  *     (533) Даны натуральное число n, действительные числа x1, ...xn.
  *           Вычислить:
  *        Б) (x[1] + x[n])(x[2] + x[n-1])...(x[n] + x[1])
- * 
- * Ссылка:
+ * @see
  *     https://ivtipm.github.io/Programming/Glava14/index14.htm#z533
  */
 

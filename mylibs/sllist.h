@@ -11,12 +11,12 @@
 #pragma once
 
 
-/// @brief Узел односвязного списка
+/// Узел односвязного списка
 struct SLList_node {
     /// Хранимое значение
     float data;
 
-    /// Ссылка на следующий узел.
+    /// Указатель на следующий узел.
     /// `NULL`, если отсутствует
     /// (т.е. текущий узел - последний в списке).
     struct SLList_node *next;
@@ -29,7 +29,6 @@ struct SLList_node {
  *                 (`NULL`, если требуется создать список)
  * @param data вещественное число (`float`) для добавления
  * @return Новую голову списка
- * 
  * @note
  *   Следует сохранить новую голову списка, например:
  *   ```c
@@ -37,7 +36,10 @@ struct SLList_node {
  *   ```
  *   Иначе она будет потеряна.
  */
-struct SLList_node *SLList_new_head(struct SLList_node *old_head, float data);
+struct SLList_node *SLList_new_head(
+    struct SLList_node *old_head,
+    float data
+);
 
 /**
  * @brief Добавить элемент в конец списка (после хвоста).
@@ -54,7 +56,10 @@ struct SLList_node *SLList_new_head(struct SLList_node *old_head, float data);
  *   Его можно будет получить при помощи цикла, но делать это
  *   несколько раз, например в цикле, будет затратно по времени.
  */
-struct SLList_node *SLList_new_tail(struct SLList_node *old_tail, float data);
+struct SLList_node *SLList_new_tail(
+    struct SLList_node *old_tail,
+    float data
+);
 
 /**
  * @brief Очистить всю память, занимаемую списком.
