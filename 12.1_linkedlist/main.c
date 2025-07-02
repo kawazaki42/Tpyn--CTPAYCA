@@ -27,8 +27,11 @@ int main() {
                          // z - длиной с size_t
 
     struct SLList_node *head, *tail;
-    head = tail = NULL;
+    head = tail = NULL;  // изначально пусты
 
+    printf("Введите %d вещественных чисел через пробел:\n", n);
+
+    // Заполнение списка
     for(size_t i = 0; i < n; i++) {
         float data;
         scanf_s("%f", &data);
@@ -46,12 +49,13 @@ int main() {
         cur != NULL;
         cur = cur->next
     ) {
-        sum += cur->data * cur->data;
+        float x = cur->data;
+        sum += x*x;
     }
 
-    printf_s("%.2f\n", sum);
+    printf_s("Сумма квадратов посл-ти: %.2f\n", sum);
 
     SLList_delete(head);
-    head = tail = NULL;
+    head = tail = NULL;  // Избегаем висячих указателей
     return EXIT_SUCCESS;
 }
