@@ -1,3 +1,3 @@
 #pragma once
 
-filter_even(FILE *infile, FILE *outfile);
+void filter_even(FILE *infile, FILE *outfile);
