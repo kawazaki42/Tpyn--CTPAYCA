@@ -24,7 +24,7 @@
  * 
  *         `EXIT_FAILURE` при ошибке (напр. нехватка памяти)
  */
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
     // Установить кодировку UTF-8
     // Локаль США (для разделителя-точки)
     setlocale(LC_ALL, "en_US.UTF8");
@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
     }
 
     if(argc-1 >= 2) {
-        infname = argv[2];
+        outfname = argv[2];
     }
 
 
