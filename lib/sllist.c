@@ -1,4 +1,4 @@
-#include <stddef.h>  // NULL
+#include <stdlib.h>  // malloc, free, NULL
 #include "sllist.h"
 
 struct SLList_node *SLList_new_head(struct SLList_node *old_head, float data) {
