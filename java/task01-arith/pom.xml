@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                io.github.kawazaki42.task01arith/io.github.kawazaki42.task01arith.HelloApplication
+                                io.github.kawazaki42.task01arith/io.github.kawazaki42.task01arith.ArithExampleApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
