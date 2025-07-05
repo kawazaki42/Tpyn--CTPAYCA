@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                io.github.kawazaki42.task02loops/io.github.kawazaki42.task02loops.HelloApplication
+                                io.github.kawazaki42.task02loops/io.github.kawazaki42.task02loops.LoopExampleApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

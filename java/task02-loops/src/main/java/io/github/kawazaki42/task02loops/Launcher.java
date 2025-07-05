@@ -15,6 +15,6 @@ public class Launcher {
     /// @param args аргументы (параметры) командной строки
     public static void main(String[] args) {
         // Запустить JavaFX-приложение
-        Application.launch(HelloApplication.class, args);
+        Application.launch(LoopExampleApplication.class, args);
     }
 }

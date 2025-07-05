@@ -17,14 +17,14 @@ import java.io.IOException;
 
 
 /// Класс JavaFX-приложения
-public class HelloApplication extends Application {
+public class LoopExampleApplication extends Application {
     /// Запустить JavaFX-приложение.
     /// @param stage окно приложения
     @Override  // Переопределение метода родительского класса
     public void start(Stage stage) throws IOException {
         // Загрузчик ресурсов - форма из FXML-файла
         FXMLLoader fxmlLoader = new FXMLLoader(
-            HelloApplication.class.getResource("hello-view.fxml")
+            LoopExampleApplication.class.getResource("form.fxml")
         );
         // Загрузить форму на окно и отобразить
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);

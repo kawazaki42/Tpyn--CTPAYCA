@@ -34,8 +34,8 @@ public class Controller {
         labelResult.setText( String.format("result = %.2f", result) );
 
         String report = "";
-        report += String.format("n = %d%n", n);
         report += String.format("x = %f%n", x);
+        report += String.format("n = %d%n", n);
         report += String.format("result = %f%n%n", result);
 
         reportArea.appendText(report);
