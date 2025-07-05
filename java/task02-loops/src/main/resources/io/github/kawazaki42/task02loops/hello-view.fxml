@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="io.github.kawazaki42.task02loops.HelloController">
+<VBox alignment="CENTER" prefHeight="181.0" prefWidth="234.0" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.kawazaki42.task02loops.Controller">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <TextArea fx:id="reportArea" prefHeight="0.0" prefWidth="113.0" VBox.vgrow="ALWAYS" />
+    <HBox alignment="CENTER_RIGHT" prefHeight="8.0" prefWidth="214.0">
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
+        <Label minWidth="21.0" text="x = " />
+        <TextField fx:id="textInputX" prefHeight="25.0" prefWidth="75.0">
+            <HBox.margin>
+                <Insets right="10.0" />
+            </HBox.margin>
+        </TextField>
+        <Label minWidth="22.0" text="n = " />
+        <TextField fx:id="textInputN" prefHeight="25.0" prefWidth="75.0" />
+    </HBox>
+    <HBox alignment="CENTER_RIGHT" centerShape="false" spacing="10.0">
+        <Label fx:id="labelResult" text="result = 0" />
+        <Button alignment="CENTER_RIGHT" onAction="#onCalcButtonClick" text="Вычислить" />
+    </HBox>
 </VBox>
