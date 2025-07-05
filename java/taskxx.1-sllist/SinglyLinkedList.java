@@ -21,13 +21,13 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
     public void append(T newData) {
         Node newNode = new Node(newData, null);
-        if(last == null) {
-            assert(first == null);
-            first = newNode;
-        } else {
+        if(last != null) {
             last.next = newNode;
+            last = newNode;
+        } else {
+            assert first == null;
+            first = last = newNode;
         }
-        last = newNode;
     }
 
     protected class Iterator implements java.util.Iterator<T> {

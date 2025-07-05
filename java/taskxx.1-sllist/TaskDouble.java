@@ -14,6 +14,7 @@ public class TaskDouble {
             b = b.prev) {
             prod *= a.data + b.data;
         }
+        System.out.println(prod);
     }
 }
 
