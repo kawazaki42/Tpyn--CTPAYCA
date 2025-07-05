@@ -1,16 +1,32 @@
+/**
+ * @file
+ * Класс JavaFX-приложения.
+ * @author Николай Ковалев
+ */
+
 package io.github.kawazaki42.task02loops;
 
+// Стандартные импорты для JavaFX
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// Исключение (ошибка) ввода-вывода
 import java.io.IOException;
 
+
+/// Класс JavaFX-приложения
 public class HelloApplication extends Application {
-    @Override
+    /// Запустить JavaFX-приложение.
+    /// @param stage окно приложения
+    @Override  // Переопределение метода родительского класса
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        // Загрузчик ресурсов - форма из FXML-файла
+        FXMLLoader fxmlLoader = new FXMLLoader(
+            HelloApplication.class.getResource("hello-view.fxml")
+        );
+        // Загрузить форму на окно и отобразить
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);

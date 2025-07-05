@@ -12,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/// Исключение (ошибка) ввода-вывода
+// Исключение (ошибка) ввода-вывода
 import java.io.IOException;
 
 
@@ -27,7 +27,7 @@ public class ArithExampleApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(
                 ArithExampleApplication.class.getResource("view.fxml")
         );
-        // Загрузить форму на окно
+        // Загрузить форму на окно и отобразить
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Задача 1 - арифметика");
         stage.setScene(scene);
