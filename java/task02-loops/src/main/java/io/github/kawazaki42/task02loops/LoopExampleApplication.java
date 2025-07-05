@@ -28,7 +28,7 @@ public class LoopExampleApplication extends Application {
         );
         // Загрузить форму на окно и отобразить
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Задача 2 - циклы");
         stage.setScene(scene);
         stage.show();
     }

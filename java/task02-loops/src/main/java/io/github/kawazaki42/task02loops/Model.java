@@ -12,6 +12,10 @@ package io.github.kawazaki42.task02loops;
 
 /// Логика программы
 public class Model {
+    /// Вычислить ответ по формуле из задачи
+    /// @param n кол-во слагаемых
+    /// @param x аргумент синуса
+    /// @return сумма из формулы
     public static double calc(int n, double x) {
         // sin(x) не меняется, заранее вычислим его
         double sinX = Math.sin(x);
