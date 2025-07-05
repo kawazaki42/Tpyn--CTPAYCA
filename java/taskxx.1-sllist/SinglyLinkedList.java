@@ -33,7 +33,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     protected class Iterator implements java.util.Iterator<T> {
         private Node cur;
         public Iterator() {
-            cur = first;
+            cur = getFirst();
         }
         public T next() {
             T result = cur.data;
