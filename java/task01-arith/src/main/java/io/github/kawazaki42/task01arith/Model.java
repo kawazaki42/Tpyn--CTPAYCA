@@ -1,7 +1,7 @@
 /**
  * @file
+ * Логика программы (Model по MVC)
  * @author Николай Ковалев
- * @brief Логика программы (Model по MVC)
  */
 
 // Имя пакета программы
@@ -36,7 +36,8 @@ public class Model {
      * @return значение `b`
      */
     public static double calcB(double z) {
-        double result = z*z;
+        double result;
+        result = z*z;
         result /= 3 + z*z/5;
         result += 1;
 
